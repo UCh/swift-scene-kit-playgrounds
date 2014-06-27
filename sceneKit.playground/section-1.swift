@@ -43,6 +43,14 @@ program.setSemantic(SCNModelViewProjectionTransform, forSymbol: "u_mvpMatrix", o
 
 globe.program = program
 
+var spin = CABasicAnimation(keyPath: "rotation")
+spin.toValue = NSValue(SCNVector4: SCNVector4(x: 1, y: 1, z: 0, w: 2.0*M_PI))
+spin.duration = 4
+spin.repeatCount = HUGE // for infinity
+globeNode.addAnimation(spin, forKey: "spin around")
+
+
+
 
 
 

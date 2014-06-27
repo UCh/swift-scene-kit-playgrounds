@@ -7,6 +7,8 @@ attribute vec4        a_vertex;
 //attribute vec2        a_texture;
 
 //varying vec2        v_texture;
+//varying vec4        v_color;
+varying vec4 v_color;
 
 void main()
 {
@@ -14,5 +16,9 @@ void main()
 //    v_texture = a_texture;
     
     // Here we set the final position to this vertex.
+    v_color = a_vertex;
     gl_Position = u_mvpMatrix * a_vertex;
+
+//    v_color = vec4(1.0,0.0,0.0,1.0);
 }
+
