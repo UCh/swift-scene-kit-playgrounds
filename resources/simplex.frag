@@ -1,10 +1,17 @@
-//precision mediump float;
-//precision lowp int;
+uniform float u_time;
 
-//uniform sampler2D    u_maps[2];
-
-//varying vec4        v_color;
 varying vec4 v_color;
+
+//
+// Description : Array and textureless GLSL 2D/3D/4D simplex
+//               noise functions.
+//      Author : Ian McEwan, Ashima Arts.
+//  Maintainer : ijm
+//     Lastmod : 20110822 (ijm)
+//     License : Copyright (C) 2011 Ashima Arts. All rights reserved.
+//               Distributed under the MIT License. See LICENSE file.
+//               https://github.com/ashima/webgl-noise
+//
 
 vec4 mod289(vec4 x) {
     return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -126,16 +133,7 @@ float snoise(vec4 v)
 
 void main()
 {
-    // Here we set the diffuse color to the fragment.
-//    gl_FragColor = texture2D(u_maps[0], v_texture);
-    
-    // Now we use the second texture to create an ambient color.
-    // Ambient color doesn't affect the alpha channel and changes
-    // less than half the natural color of the fragment.
-//    gl_FragColor.rgb += texture2D(u_maps[1], v_texture).rgb * .4;
-//    gl_FragColor.rgba = vec4(1.0,0.0,0.0,1.0);
-    
-    vec4 final = vec4(1.0,1.0,1.0,1.0);
-    final.rgb *= snoise(v_color);
-    gl_FragColor = final; //v_color * snoise(v_color.xyz); // vec3(1.0,1.0,1.0) * 0.5; //snoise(v_color.xyz);
+    vec4 noiseColor = vec4(1.0,1.0,1.0,1.0);
+    noiseColor.rgb *= snoise(v_color);
+    gl_FragColor = noiseColor;
 }
