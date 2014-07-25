@@ -25,7 +25,7 @@ model.geometry.firstMaterial.diffuse.contents = color;
 scene.rootNode.addChildNode(model)
 
 var spin = CABasicAnimation(keyPath: "rotation")
-spin.toValue = NSValue(SCNVector4: SCNVector4(x: 0, y: 1, z: 1, w: 2.0*M_PI))
+spin.toValue = NSValue(SCNVector4: SCNVector4(x: 0.0, y: 1.0, z: 1.0, w: CGFloat(2.0*M_PI)))
 spin.duration = 5
 spin.repeatCount = HUGE
 spin.delegate

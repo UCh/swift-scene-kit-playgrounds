@@ -40,11 +40,11 @@ class MyScene : SCNScene  {
         earth.geometry.firstMaterial.specular.intensity = 0.25
         earth.geometry.firstMaterial.emission.contents = NSImage(named: "earthlights1k")
         
-        sunRotationSpeed = M_PI_4/2
-        sunRotation = M_PI_2
-        sun.rotation = SCNVector4(x: 0, y: 1, z: 0, w: sunRotation)
+        sunRotationSpeed = CGFloat(M_PI_4/2)
+        sunRotation = CGFloat(M_PI_2)
+        sun.rotation = SCNVector4(x: 0.0, y: 1.0, z: 0.0, w: sunRotation)
         
-        earthRotationSpeed = M_PI_4/10
+        earthRotationSpeed = CGFloat(M_PI_4/10)
         earthRotation = 0
         
         super.init()
@@ -58,10 +58,10 @@ class MyScene : SCNScene  {
     {
         var rotation = value
         
-        if(value < -M_PI*2)
+        if value < CGFloat(-M_PI*2)
         {
-            rotation = value + M_PI*2
-            node.rotation = SCNVector4(x: 0, y: 1, z: 0, w: rotation)
+            rotation = value + CGFloat(M_PI*2)
+            node.rotation = SCNVector4(x: 0.0, y: 1.0, z: 0.0, w: rotation)
         }
         
         return rotation - increase
@@ -82,8 +82,8 @@ class MyScene : SCNScene  {
             self.doAnimation()
         }
         
-        sun.rotation = SCNVector4(x: 0, y: 1, z: 0, w: sunRotation)
-        earth.rotation = SCNVector4(x: 0, y: 1, z: 0, w: earthRotation)
+        sun.rotation = SCNVector4(x: 0.0, y: 1.0, z: 0.0, w: sunRotation)
+        earth.rotation = SCNVector4(x: 0.0, y: 1.0, z: 0.0, w: earthRotation)
         
         SCNTransaction.commit()
     }

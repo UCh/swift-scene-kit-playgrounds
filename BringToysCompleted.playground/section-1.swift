@@ -53,13 +53,13 @@ class MyScene : SCNScene, SCNProgramDelegate  {
     
     func doAnimation(){
         
-        if(spin > M_PI*2)
+        if spin > CGFloat(M_PI*2)
         {
-            spin -= M_PI*2
+            spin -= CGFloat(M_PI*2)
             model.rotation = SCNVector4(x: 0, y: 1, z: 1, w: spin)
             
         }
-        spin += M_PI_2
+        spin += CGFloat(M_PI_2)
         XCPCaptureValue("Spin rotation", spin)
         
         SCNTransaction.begin()
