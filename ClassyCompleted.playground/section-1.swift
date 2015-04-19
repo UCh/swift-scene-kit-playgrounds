@@ -5,20 +5,24 @@ import XCPlayground
 
 class MyScene : SCNScene  {
     
-    let camera:SCNNode
-    let model:SCNNode
-    var spin:CGFloat
+    var camera = SCNNode()
+    var model = SCNNode ()
+    var spin:CGFloat = 0
     
-    init() {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init() {
         
         camera = SCNNode()
         camera.camera = SCNCamera()
-        camera.position = SCNVector3(x: 0, y: 0, z: 15)
+        camera.position = SCNVector3(x: 0, y: 0, z: 30)
         
         model = SCNNode(geometry: SCNTorus(ringRadius: 4, pipeRadius: 1))
-        model.geometry.firstMaterial.diffuse.contents = NSColor.greenColor()
+        model.geometry?.firstMaterial?.diffuse.contents = NSColor.greenColor()
 
-        spin = 0
+        spin = 10
         
         super.init()
         

@@ -5,13 +5,17 @@ import XCPlayground
 
 class MyScene : SCNScene, SCNProgramDelegate  {
     
-    let camera:SCNNode
-    let model:SCNNode
-    let program:SCNProgram
+    var camera = SCNNode()
+    var model = SCNNode ()
+    var program = SCNProgram()
 
-    var spin:CGFloat
+    var spin:CGFloat = 0
     
-    init() {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init() {
         
         camera = SCNNode()
         camera.camera = SCNCamera()
@@ -25,14 +29,14 @@ class MyScene : SCNScene, SCNProgramDelegate  {
         
         var error:NSErrorPointer = NSErrorPointer()
         var path = NSBundle.mainBundle().pathForResource("passthrough", ofType: "vert")
-        let vertex = String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: error)
+        let vertex = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: error)
 
         if let vertexShader = vertex {
             program.vertexShader = vertexShader;
         }
         
         path = NSBundle.mainBundle().pathForResource("simplex", ofType: "frag")
-        let frag = String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: error)
+        let frag = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: error)
         
         if let fragShader = frag {
             program.fragmentShader = fragShader;
@@ -42,7 +46,7 @@ class MyScene : SCNScene, SCNProgramDelegate  {
         program.setSemantic(SCNGeometrySourceSemanticVertex, forSymbol: "a_vertex", options: nil)
         program.setSemantic(SCNModelViewProjectionTransform, forSymbol: "u_mvpMatrix", options: nil)
         
-        model.geometry.program = program
+        model.geometry?.program = program
         
         super.init()
         
@@ -85,4 +89,6 @@ scene.doAnimation();
 
 XCPShowView("My Scene view", sceneView)
 XCPExecutionShouldContinueIndefinitely()
+
+
 
