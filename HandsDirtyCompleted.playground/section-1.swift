@@ -20,7 +20,7 @@ scene.rootNode.addChildNode(cameraNode)
 var model = SCNNode(geometry: SCNTorus(ringRadius: 3, pipeRadius: 1))
 var color = NSColor.greenColor()
 
-model.geometry.firstMaterial.diffuse.contents = color;
+model.geometry?.firstMaterial?.diffuse.contents = color;
 
 scene.rootNode.addChildNode(model)
 

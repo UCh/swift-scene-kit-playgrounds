@@ -7,38 +7,42 @@ import XCPlayground
 
 class MyScene : SCNScene  {
     
-    let camera:SCNNode
-    let sun:SCNNode
-    let earth:SCNNode
+    var camera = SCNNode()
+    var sun = SCNNode()
+    var earth = SCNNode()
     
-    var sunRotation:CGFloat
-    let sunRotationSpeed:CGFloat
+    var sunRotation:CGFloat = 0
+    var sunRotationSpeed:CGFloat = 0
     
-    var earthRotation:CGFloat
-    let earthRotationSpeed:CGFloat
+    var earthRotation:CGFloat = 0
+    var earthRotationSpeed:CGFloat = 0
     
-    init() {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init() {
         
         camera = SCNNode()
         camera.camera = SCNCamera()
         camera.position = SCNVector3(x: 0, y: 0, z: 15)
         camera.light = SCNLight()
-        camera.light.type = SCNLightTypeAmbient
-        camera.light.color =  NSColor(white: 0.0005, alpha: 1.0)
+        camera.light?.type = SCNLightTypeAmbient
+        camera.light?.color =  NSColor(white: 0.0005, alpha: 1.0)
         
         sun = SCNNode()
         sun.light = SCNLight()
-        sun.light.type = SCNLightTypeDirectional
+        sun.light?.type = SCNLightTypeDirectional
         
         earth = SCNNode(geometry: SCNSphere(radius: 5))
         
-        var material = earth.geometry.firstMaterial;
+        var material = earth.geometry?.firstMaterial;
         
-        earth.geometry.firstMaterial.ambient.contents = NSImage(named:"earthmap1k.jpg")
-        earth.geometry.firstMaterial.diffuse.contents = earth.geometry.firstMaterial.ambient.contents
-        earth.geometry.firstMaterial.specular.contents = NSImage(named: "earthspec1k")
-        earth.geometry.firstMaterial.specular.intensity = 0.25
-        earth.geometry.firstMaterial.emission.contents = NSImage(named: "earthlights1k")
+        earth.geometry?.firstMaterial?.ambient.contents = NSImage(named:"earthmap1k.jpg")
+        earth.geometry?.firstMaterial?.diffuse.contents = earth.geometry?.firstMaterial?.ambient.contents
+        earth.geometry?.firstMaterial?.specular.contents = NSImage(named: "earthspec1k")
+        earth.geometry?.firstMaterial?.specular.intensity = 0.25
+        earth.geometry?.firstMaterial?.emission.contents = NSImage(named: "earthlights1k")
         
         sunRotationSpeed = CGFloat(M_PI_4/2)
         sunRotation = CGFloat(M_PI_2)
@@ -53,6 +57,8 @@ class MyScene : SCNScene  {
         rootNode.addChildNode(sun)
         rootNode.addChildNode(earth)
     }
+
+
     
     func rotateNodeLeft(node:SCNNode ,value:CGFloat, increase:CGFloat) -> CGFloat
     {
@@ -100,4 +106,5 @@ scene.doAnimation()
 
 XCPShowView("The pale blue dot", sceneView)
 XCPExecutionShouldContinueIndefinitely()
+
 
